@@ -1,25 +1,28 @@
 resource "google_compute_instance" "firstserver" {
   name = "thefirstserver"
+
   "boot_disk" {
     initialize_params {
       image = "debian-cloud/debian-9"
     }
-
   }
+
   machine_type = "n1-standard-1" //n1-standard-1
-  zone = "us-west1-a"
+  zone         = "us-west1-a"
+
   "network_interface" {
-    subnetwork = "${google_compute_subnetwork.dev-subnet.name}"
-    access_config {}
+    subnetwork    = "${google_compute_subnetwork.dev-subnet.name}"
+    access_config = {}
   }
 
   metadata {
     foo = "bar"
   }
+
   //Permission operation within Google cloud platform
-//  service_account {
-//    scopes = ["userinfo-email", "compute-ro", "storage-ro"]
-//  }
+  //  service_account {
+  //    scopes = ["userinfo-email", "compute-ro", "storage-ro"]
+  //  }
 }
 
 // Terraform plugin for creating random ids
@@ -54,15 +57,16 @@ resource "google_compute_instance" "firstserver" {
 
 // AWS
 
-data "aws_ami" "ubuntu"{
+data "aws_ami" "ubuntu" {
   most_recent = true
+
   filter {
-    name = "name"
+    name   = "name"
     values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
   }
 
   filter {
-    name = "virtualization-type"
+    name   = "virtualization-type"
     values = ["hvm"]
   }
 
@@ -70,10 +74,11 @@ data "aws_ami" "ubuntu"{
 }
 
 resource "aws_instance" "secondserver" {
-  ami = "${data.aws_ami.ubuntu.id}"
+  ami           = "${data.aws_ami.ubuntu.id}"
   instance_type = "t2.micro"
+
   tags {
-    Name="identifiertag"
+    Name = "identifiertag"
   }
 
   subnet_id = "${aws_subnet.subnet2.id}"
