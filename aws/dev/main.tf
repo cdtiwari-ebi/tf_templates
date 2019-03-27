@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "dev_vpc" {
-  source      = "../modules/1-vpc"
+  source      = "../modules/vpc"
   vpc_cidr    = "192.168.0.0/18"
   tenancy     = "default"
   vpc_id      = "${module.dev_vpc.vpc_id}"
