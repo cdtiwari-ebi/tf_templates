@@ -1,10 +1,9 @@
 variable "namespace" {
-  default = "cd"
-  description = "Naming prefix for created resources, keeps them separate from other builds in the same tenancy"
+  default = "cd-default"
 }
 
 variable "vpc_name" {
-  default = "default-vpc"
+  default = "vpc"
 }
 
 variable "vpc_cidr" {

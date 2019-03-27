@@ -1,5 +1,5 @@
 variable "namespace" {
-  default = "cd"
+  default = "cd-default"
 }
 
 variable "instance_name" {
